@@ -23,3 +23,9 @@ class SparseVector(dict):
 
     def cosine(self, other):
         return self.dotProduct(other) / (self.length() * other.length())
+
+    def removeDimensions(self,aStopList):
+        for word in aStopList:
+            self.pop(word, None)
+
+                

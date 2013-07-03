@@ -3,6 +3,7 @@ import HTMLDocument
 import FrogText
 import LanguageGuesser
 import SparseVector
+import StopList
 import re
 import json
 import requests
@@ -74,23 +75,32 @@ ministers = {
     "Coninck":1
 }
 
+for x in ministers:
+    ministers[x] = SparseVector.SparseVector()
+
+stopList = StopList.StopList("dutch-stop-words.txt")
 
 def getMinisters():
     files = glob.glob('articles/frog/*')
 
-    m = SparseVector.SparseVector()
     for f in files:
         text = FrogText.FrogText(f)
-        hit = 0
+        m = None
         for token in text.tokens:
             for minister in ministers:
-                if re.search(minister, token):
-                    ministers[minister] += 1
-        if hit == 1:
+                if re.search(minister, token,re.IGNORECASE):
+                    m = minister
+        if not m == None:
             for lemma in text.lemmas:
-                m.add(lemma)
+                ministers[m].add(lemma)
+
+    for x in ministers:
+        ministers[x].removeDimensions(stopList)
                 
-    print ministers
+    for x in ministers:
+        for y in ministers:
+            print x, y, ministers[x].cosine(ministers[y])
+
 
 getMinisters()
 

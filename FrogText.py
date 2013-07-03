@@ -11,3 +11,4 @@ class FrogText:
                 if len(line) > 2:
                     self.lemmas.append(line[2])
                     self.tokens.append(line[1])
+
