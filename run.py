@@ -2,6 +2,7 @@ import glob
 import HTMLDocument
 import FrogText
 import LanguageGuesser
+import SparseVector
 import re
 import json
 import requests
@@ -55,6 +56,41 @@ def addToElastic():
             cm = 'curl -XPUT http://localhost:9200/staatsblad/article/' + str(id) + ' -d \'' + json.dumps(j) + '\''
             os.system(cm)
 
-addToElastic()
-        
+#addToElastic()
  
+ministers = {
+    "Rupo":1,
+    "Crem":1,
+    "Reynders":1,
+    "Lanotte":1,
+    "Croo":1,
+    "Milquet":1,
+    "Onkelinx":1,
+    "Laruelle":1,
+    "Geens":1,
+    "Labille":1,
+    "Turtelboom":1,
+    "Chastel":1,
+    "Coninck":1
+}
+
+
+def getMinisters():
+    files = glob.glob('articles/frog/*')
+
+    m = SparseVector.SparseVector()
+    for f in files:
+        text = FrogText.FrogText(f)
+        hit = 0
+        for token in text.tokens:
+            for minister in ministers:
+                if re.search(minister, token):
+                    ministers[minister] += 1
+        if hit == 1:
+            for lemma in text.lemmas:
+                m.add(lemma)
+                
+    print ministers
+
+getMinisters()
+
