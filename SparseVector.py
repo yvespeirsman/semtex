@@ -8,11 +8,11 @@ class SparseVector(dict):
     def length(self):
         return math.sqrt(sum([x*x for x in self.values()]))
 
-    def add(self, dimension):
+    def add(self, dimension, freq=1):
         if self.has_key(dimension):
-            self[dimension] += 1
+            self[dimension] += freq
         else:
-            self[dimension] = 1
+            self[dimension] = freq
 
     def dotProduct(self, other):
         prod = 0

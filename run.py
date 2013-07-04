@@ -4,6 +4,7 @@ import FrogText
 import LanguageGuesser
 import SparseVector
 import StopList
+import VectorSpace
 import re
 import json
 import requests
@@ -75,9 +76,7 @@ ministers = {
     "Coninck":1
 }
 
-for x in ministers:
-    ministers[x] = SparseVector.SparseVector()
-
+space = VectorSpace.VectorSpace()
 stopList = StopList.StopList("dutch-stop-words.txt")
 
 def getMinisters():
@@ -92,14 +91,15 @@ def getMinisters():
                     m = minister
         if not m == None:
             for lemma in text.lemmas:
-                ministers[m].add(lemma)
+                space.add(m,lemma)
 
-    for x in ministers:
-        ministers[x].removeDimensions(stopList)
+    for x in space:
+        space[x].removeDimensions(stopList)
                 
-    for x in ministers:
-        for y in ministers:
-            print x, y, ministers[x].cosine(ministers[y])
+    mat = space.computeSimilarityMatrix()
+    for x in mat:
+        for y in mat[x]:
+            print x,y,mat[x][y]
 
 
 getMinisters()
