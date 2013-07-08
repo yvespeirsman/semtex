@@ -1,4 +1,4 @@
-
+import Matrix
 
 class FrogText:
 
@@ -12,3 +12,11 @@ class FrogText:
                     self.lemmas.append(line[2])
                     self.tokens.append(line[1])
 
+
+    def getBigrams(self):
+        bigrams = Matrix.Matrix()
+        for i in range(0, len(self.tokens)-1):
+            w1 = self.tokens[i]
+            w2 = self.tokens[i+1]
+            bigrams.add(w1,w2,1)
+        return bigrams

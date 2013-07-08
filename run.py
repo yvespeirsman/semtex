@@ -5,6 +5,7 @@ import LanguageGuesser
 import SparseVector
 import StopList
 import VectorSpace
+import Matrix
 import re
 import json
 import requests
@@ -58,7 +59,7 @@ def addToElastic():
             cm = 'curl -XPUT http://localhost:9200/staatsblad/article/' + str(id) + ' -d \'' + json.dumps(j) + '\''
             os.system(cm)
 
-#addToElastic()
+addToElastic()
  
 ministers = {
     "Rupo":1,
@@ -76,8 +77,8 @@ ministers = {
     "Coninck":1
 }
 
-space = VectorSpace.VectorSpace()
-stopList = StopList.StopList("dutch-stop-words.txt")
+#space = VectorSpace.VectorSpace()
+#stopList = StopList.StopList("dutch-stop-words.txt")
 
 def getMinisters():
     files = glob.glob('articles/frog/*')
@@ -96,11 +97,28 @@ def getMinisters():
     for x in space:
         space[x].removeDimensions(stopList)
                 
+    simList = []
     mat = space.computeSimilarityMatrix()
     for x in mat:
         for y in mat[x]:
             print x,y,mat[x][y]
+            simList.append((mat[x][y], x,y))
+    simList.sort()
+    simList.reverse()
 
+    print simList
 
-getMinisters()
+#getMinisters()
 
+allBigrams = Matrix.Matrix()
+def learn():
+    files = glob.glob('articles/frog/*')
+
+    for f in files:
+        print f
+        text = FrogText.FrogText(f)
+        bi = text.getBigrams()
+        allBigrams.sum(bi)
+
+#learn()
+#print allBigrams

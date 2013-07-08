@@ -60,9 +60,17 @@
 		  <button class="btn btn-primary" id="search-button" type="submit"><i class="icon-search icon-white"></i> Search</button>
 	  </form>
 
-	<b>Here we show the results for {{q}}</b>  
+	<b>Here we show the {{len(r)}} results for {{q}}</b>  
+	</center>
+	<table class="table table-hover">
+	  <tbody>
+	%for i in range(0, len(r)):
+      
+	    <tr><td>{{" ".join(r[i]['text'][:100])}}</td></tr>
 	  
-	<center>
+	%end
+	  </tbody>
+	  </table>
     </div> <!-- /container -->
 
     <!-- Le javascript

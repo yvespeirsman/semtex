@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
 from bottle import run, route, template, request, post
+import ElasticQuery
 
 @post('/search')
 def displayResults():
-  query = request.forms.query
-  t = template('results.tpl', q=query)
+  queryTerm = request.forms.query
+  query = ElasticQuery.ElasticQuery()
+  results = query.submit(queryTerm)
+  print results
+  t = template('templates/results.tpl', q=queryTerm, r=results)
   return t
 
 @route('/')
 def show():
-  t = template('test.tpl')
+  t = template('templates/index.tpl')
   return t
 
 run()
