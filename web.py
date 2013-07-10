@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from bottle import run, route, template, request, post
+from bottle import run, route, template, request, post, static_file
 import ElasticQuery
 
 @post('/search')
@@ -16,6 +16,10 @@ def displayResults():
 def show():
   t = template('templates/index.tpl')
   return t
+
+@route('/static/:path#.+#', name='static')
+def static(path):
+    return static_file(path, root='static')
 
 run()
 

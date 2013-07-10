@@ -60,22 +60,24 @@
 		  <button class="btn btn-primary" id="search-button" type="submit"><i class="icon-search icon-white"></i> Search</button>
 	  </form>
 
-	<b>Here we show the {{len(r)}} results for {{q}}</b>  
 	</center>
-	<table class="table table-hover">
-	  <tbody>
+	<ul class="breadcrumb">
+	  <li>{{q}}: {{len(r)}} results</li>
+	</ul>
+	<table class="table table-hover" id="test3">
 	%for i in range(0, len(r)):
-      
-	    <tr><td>{{" ".join(r[i]['text'][:100])}}</td></tr>
+	<tbody>
+	    <tr id="test.html"><td id="test2.html">{{" ".join(r[i]['text'][:100])}}</td></tr>
 	  
 	%end
-	  </tbody>
+	</tbody>
 	  </table>
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <!--
     <script src="./test_files/jquery.js"></script>
     <script src="./test_files/bootstrap-transition.js"></script>
     <script src="./test_files/bootstrap-alert.js"></script>
@@ -88,8 +90,9 @@
     <script src="./test_files/bootstrap-button.js"></script>
     <script src="./test_files/bootstrap-collapse.js"></script>
     <script src="./test_files/bootstrap-carousel.js"></script>
-    <script src="./test_files/bootstrap-typeahead.js"></script>
-	<script src="script.js"></script>
+    <script src="./test_files/bootstrap-typeahead.js"></script>-->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="static/script.js" charset="utf-8"></script>
   
 
 </body></html>
