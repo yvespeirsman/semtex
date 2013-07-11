@@ -39,12 +39,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="http://twitter.github.io/bootstrap/examples/starter-template.html#">Project name</a>
+          <a class="brand" href="http://localhost:8080">Staatsblad Search</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="http://twitter.github.io/bootstrap/examples/starter-template.html#">Home</a></li>
               <li><a href="http://twitter.github.io/bootstrap/examples/starter-template.html#about">About</a></li>
-              <li><a href="http://twitter.github.io/bootstrap/examples/starter-template.html#contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -64,10 +62,10 @@
 	<ul class="breadcrumb">
 	  <li>{{q}}: {{len(r)}} results</li>
 	</ul>
-	<table class="table table-hover" id="test3">
+	<table class="table table-hover">
 	%for i in range(0, len(r)):
 	<tbody>
-	    <tr id="test.html"><td id="test2.html">{{" ".join(r[i]['text'][:100])}}</td></tr>
+	    <tr id="docs/{{r[i]['docid']}}"><td>{{" ".join(r[i]['text'][:100])}}</td></tr>
 	  
 	%end
 	</tbody>
@@ -77,22 +75,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--
-    <script src="./test_files/jquery.js"></script>
-    <script src="./test_files/bootstrap-transition.js"></script>
-    <script src="./test_files/bootstrap-alert.js"></script>
-    <script src="./test_files/bootstrap-modal.js"></script>
-    <script src="./test_files/bootstrap-dropdown.js"></script>
-    <script src="./test_files/bootstrap-scrollspy.js"></script>
-    <script src="./test_files/bootstrap-tab.js"></script>
-    <script src="./test_files/bootstrap-tooltip.js"></script>
-    <script src="./test_files/bootstrap-popover.js"></script>
-    <script src="./test_files/bootstrap-button.js"></script>
-    <script src="./test_files/bootstrap-collapse.js"></script>
-    <script src="./test_files/bootstrap-carousel.js"></script>
-    <script src="./test_files/bootstrap-typeahead.js"></script>-->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="static/script.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/script.js" charset="utf-8"></script>
   
 
 </body></html>

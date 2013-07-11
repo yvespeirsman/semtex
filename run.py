@@ -37,14 +37,18 @@ def makeJSON():
         lang = languageGuesser.guessLanguage(t.lemmas)
 
         fn = f.split("/")[-1].split(".")[0]
+        docid = re.sub('-','',fn)
         print fn, lang
         d = {"lemmas": t.lemmas,
              "text": t.tokens,
-             "language": lang}
+             "language": lang,
+             "docid": docid}
 
         fo = "articles/json/" + fn + ".json"
         with open(fo,'w') as outFile:
             json.dump(d,outFile)
+
+makeJSON()
         
 def addToElastic():
     r = requests.get('http://localhost:9200')
