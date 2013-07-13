@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from bottle import run, route, template, request, post, static_file, debug
+import os
 import ElasticQuery
 
 @post('/search')
@@ -34,5 +35,5 @@ def static(path):
     return static_file(path, root='static')
 
 debug(True)
-run()
+run( port = os.environ.get('PORT',5000))
 
