@@ -6,6 +6,7 @@ import SparseVector
 import StopList
 import VectorSpace
 import Matrix
+import TopicModel
 import re
 import json
 import requests
@@ -48,7 +49,7 @@ def makeJSON():
         with open(fo,'w') as outFile:
             json.dump(d,outFile)
 
-makeJSON()
+#makeJSON()
         
 def addToElastic():
     r = requests.get('http://localhost:9200')
@@ -63,7 +64,7 @@ def addToElastic():
             cm = 'curl -XPUT http://localhost:9200/staatsblad/article/' + str(id) + ' -d \'' + json.dumps(j) + '\''
             os.system(cm)
 
-addToElastic()
+#addToElastic()
  
 ministers = {
     "Rupo":1,
@@ -83,6 +84,15 @@ ministers = {
 
 #space = VectorSpace.VectorSpace()
 #stopList = StopList.StopList("dutch-stop-words.txt")
+
+def runTopicModel():
+    files = glob.glob('articles/frog/*')
+    stopList = StopList.StopList("dutch-stop-words.txt")
+    corpus = TopicModel.MyCorpus(files, stopList)
+    model = TopicModel.TopicModel()
+    model.train(corpus,100)
+
+runTopicModel()
 
 def getMinisters():
     files = glob.glob('articles/frog/*')
