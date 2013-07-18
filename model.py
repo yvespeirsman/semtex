@@ -16,6 +16,7 @@ raw_input()
 """
 
 class MyCorpus(object):
+
     def __iter__(self):
 
         for f in glob.glob('articles/frog/*'):

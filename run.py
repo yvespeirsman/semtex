@@ -1,12 +1,5 @@
 import glob
-import HTMLDocument
-import FrogText
-import LanguageGuesser
-import SparseVector
-import StopList
-import VectorSpace
-import Matrix
-import TopicModel
+from model import HTMLDocument, FrogText, LanguageGuesser, SparseVector, StopList, VectorSpace, Matrix, TopicModel, 
 import re
 import json
 import requests
