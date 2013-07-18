@@ -1,4 +1,5 @@
 from gensim import corpora, models, similarities
+import logging
 
 class MyCorpus(object):
 
@@ -23,9 +24,11 @@ class MyCorpus(object):
 
 class TopicModel():
     
-    def train(self, corpus, num):
+    def train(self, corpus, num, outputFile="log.txt"):
+        logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO,filename=outputFile)
+
         tfidf = models.TfidfModel(corpus)
         corpus_tfidf = tfidf[corpus]
 
-        lsi = models.LsiModel(corpus_tfidf, id2word = corpus.dictionary, num_topics = num)
-        lsi.show_topics(topics=-1, topn=100, log=True)
+        model = models.ldamodel.LdaModel(corpus_tfidf, id2word = corpus.dictionary, num_topics = num)
+        model.show_topics(topics=-1, topn=100, log=True)
