@@ -1,5 +1,5 @@
 import glob
-from model import HTMLDocument, FrogText, LanguageGuesser, SparseVector, StopList, VectorSpace, Matrix, TopicModel, 
+from model import HTMLDocument, FrogText, LanguageGuesser, SparseVector, StopList, VectorSpace, Matrix, TopicModel
 import re
 import json
 import requests

@@ -16,7 +16,7 @@ class WikiCorpus():
             if re.search('\w',line):
                 text += line
         texts = text.split("<SPLIT>")
-        print(texts[:20])
+        return texts
 
         """
         text = "<data>"

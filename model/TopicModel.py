@@ -17,7 +17,7 @@ class MyCorpus(object):
                 line = line.strip().split("\t")
                 if len(line) > 2:
                     word = line[2].lower()
-                    if len(word) > 2 and not self.stop.has_key(word):
+                    if len(word) > 4 and not self.stop.has_key(word):
                         text.append(word)
             i.close()
             yield self.dictionary.doc2bow(text,allow_update=True)
